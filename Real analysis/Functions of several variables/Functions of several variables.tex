@@ -1,0 +1,251 @@
+\documentclass[12pt]{article}
+% Page setup
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{titling}
+\setlength{\droptitle}{-6em} 
+
+% Math packages
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\makeatletter
+\g@addto@macro\th@plain{\normalfont}
+\makeatother
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{%
+  \par\pushQED{\qed}%
+  \normalfont
+  \trivlist
+  \item[\hskip\labelsep\bfseries #1\@addpunct{.}]\normalfont%
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% Commutative diagrams and proofs
+\usepackage{tikz-cd}
+\usepackage{proof}
+
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{statement}[theorem]{Statement}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+% Useful commands for category theory
+\newcommand{\mc}{\mathcal}
+\newcommand{\ini}{\operatorname{ini}}
+\newcommand{\ter}{\operatorname{ter}}
+\newcommand{\cod}{\operatorname{cod}}
+\newcommand{\dom}{\operatorname{dom}}
+
+\newcommand{\List}{\operatorname{List}}
+\newcommand{\lop}{\operatorname{[ \ ]}}
+\newcommand{\len}{\operatorname{len}}
+\newcommand{\type}{\operatorname{type}}
+
+\newcommand{\Exc}{\operatorname{Exception}}
+
+\newcommand{\Kl}{\operatorname{Kl}}
+\newcommand{\plus}{\operatorname{+}}
+
+\newcommand{\Cat}{\mathcal{C}at}
+\newcommand{\Vect}{\mathrm{Vect}_\mathbf{k}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Nat}{\operatorname{Nat}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\obj}{\operatorname{obj}}
+\newcommand{\arr}{\operatorname{arr}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\coadj}{\operatorname{coadj}}
+\newcommand{\colim}{\operatorname*{colim}}
+\newcommand{\lcoim}{\operatorname*{(co)lim}}
+
+\newcommand{\asc}{\operatorname{asc}}
+\newcommand{\dst}{\operatorname{dst}}
+\newcommand{\cmp}{\operatorname{cmp}}
+
+% Arrows
+\newcommand{\ra}{\rightarrow}
+\newcommand{\from}{\leftarrow}
+\newcommand{\To}{\Rightarrow}
+\newcommand{\xto}{\xrightarrow}
+\newcommand{\xfrom}{\xleftarrow}
+
+\newcommand{\R}{\mathbb{R}}
+
+
+\renewcommand{\labelitemi}{--} % Level 1: Dashes
+\renewcommand{\labelitemii}{$\circ$} % Level 2: Circles
+\renewcommand{\labelitemiii}{$\bullet$} % Level 3: Bullets (default)
+
+
+\title{Functions of several variables}
+\author{Alyson Mei}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+This notes are based on Mathematical Analysis by V.A.Zorich.
+
+\tableofcontents
+
+
+\newpage
+
+\section{$\R^m$ space and the most important classes of its subsets}
+
+\paragraph{1) $\R^m$, Distance}
+
+\begin{definition}[$\R^m$]
+    $$\R^m := \lbrace (x^1, ..., x^m) \mid x^i \in \R \rbrace.$$
+\end{definition}
+
+\begin{definition}[Distance]
+    $$d: \R^m \times \R^m \to \R:$$
+    \begin{itemize}
+        \item $d(x_1, x_2) \geq 0$;
+        \item $d(x_1, x_2) = 0 \Leftrightarrow x_1 = x_2$;
+        \item $d(x_1, x_2) = d(x_2, x_1)$;
+        \item $d(x_1, x_3) \leq d(x_1, x_2) + d(x_1, x_3)$.
+    \end{itemize}
+    We define $d$ as:
+    $$d(x_1, x_2) = \sqrt{\sum_{i=1}^m (x_1^i - x_2^i)^2}.$$
+\end{definition}
+
+Property:
+$$|x_1^i - x_2^i| \leq d(x_1, x_2) \leq \sqrt{m} \max_{1 \leq i \leq m} |x_1^i -x_2^i|.$$
+
+\paragraph{2) Open and closed sets in $\R^m$}
+
+\begin{definition}[Open ball]
+    $$B(a, \delta) = \lbrace x \in \R^m \mid d(a, x) < \delta \rbrace.$$
+    (also $\delta$-heighborhood)
+\end{definition}
+
+\begin{definition}[Open set, closed set]
+    \hfil
+    \begin{itemize}
+        \item $G$ is open if every its point has a neighborhood $\subseteq G$;
+        \item $F$ is closed, if its complement is open.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    \hfil
+\begin{itemize}
+    \item Finite $\bigcap$ of open sets is open, finite $\bigcup$ of closed sets is closed;
+    \item Any $\bigcup$ of open sets is open, any $\bigcap$ of closed set is closed.
+\end{itemize}
+\end{proposition}
+
+\begin{definition}[Neighborhood; interior, exterior and boundary point; limit point; closure]
+    (standard definitions)
+\end{definition}
+
+\begin{proposition}
+    $F$ is closed $\Leftrightarrow$ $F = \bar{F}$.
+\end{proposition}
+
+% \begin{definition}[Limit over the base]
+%     // Not 
+% \end{definition}
+
+\section{Vector structure in $\R^m$}
+
+\begin{definition}[$\R^m$ as a vector space]
+    \hfil
+    \begin{itemize}
+        \item[$\bullet$] $x = (x^1, ..., x^m) \in \R^m$;
+        \item[$\bullet$] $\lambda x$, $x_1 + x_2$ work componentwise; 
+        \item[$\bullet$] Basis $e_i := (0_{(1)}, ..., 0_{(i-1)}, 1_{(i)}, 0_{(i+1)}, ..., 0_{(m)})$, thus $$x = \sum_{i \leq m} x^ie_i =: x^i e_i.$$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Linear maps $L: \R^m \to \R^n$]
+    \hfil
+    \begin{itemize}
+        \item[$\bullet$] Linear map $L$: $L(\lambda_1 x_1 + \lambda_2 x_2) = \lambda_1 L(x_1) + \lambda_2 L(x_2).$ Thus, on the elements of basis: $$L(e_i) = a_i^j \tilde{e}_j \qquad (i = 1,...,m),$$ 
+        $$L(h) = L(h^i e_i) = h^i a_i^j \tilde{e_j}, \text{ in coordinates } L(h) = (a_i^1h^i, ..., a_i^n h^i).$$
+        \item[$\bullet$] Matrix form: $L(h) = Ah$, $$
+                        L(h)
+                        =
+                        \begin{pmatrix}
+                        L_1(h) \\
+                        L_2(h) \\
+                        \vdots \\
+                        L_m(h)
+                        \end{pmatrix}
+                        =
+                        \begin{pmatrix}
+                        a_{11} & a_{12} & \cdots & a_{1n} \\
+                        a_{21} & a_{22} & \cdots & a_{2n} \\
+                        \vdots & \vdots & \ddots & \vdots \\
+                        a_{m1} & a_{m2} & \cdots & a_{mn}
+                        \end{pmatrix}
+                        \begin{pmatrix}
+                        h_1 \\
+                        h_2 \\
+                        \vdots \\
+                        h_n
+                        \end{pmatrix};
+                        $$
+
+        \item[$\bullet$] Let $L_1: \R^m \to \R^n$, $L_2: \R^n \to \R^k$, then $(L_2 \circ L_1) (h)= A_2 A_1 h.$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Norm in $\R^m$]
+    Norm is a function $\lVert \rVert: \R^m \to R$ defined as:
+    $$\lVert x\rVert = \sqrt{(x^1)^2 + ... + (x^m)^2}.$$
+\end{definition}
+
+Norm properties:
+\begin{itemize}
+    \item $\lVert x \rVert \geq 0$,
+    \item $\lVert x \rVert = 0 \Leftrightarrow x = 0$,
+    \item $\lVert \lambda x \rVert = |\lambda| \cdot \lVert x \rVert$,
+    \item $\lVert x_1 + x_2 \rVert \leq \lVert x_1 \rVert + \lVert x_2 \rVert$ (and $\lVert \sum_i x_i \rVert \leq \sum_i \lVert x_i \rVert$).
+\end{itemize}
+
+\begin{definition}[Distance in $\R^m$] Distance is a function $d: \R^m \times \R^m \to \R$ defined as:
+    $$d(x_1, x_2) = \lVert x_2 - x_1 \lVert.$$
+\end{definition}
+
+\begin{definition}[$\R^m$ as a Euclidean space]
+    Scalar product on vector space $V$ is a positively defined bilinear function $$\langle x, y\rangle : V \times V \to \R.$$
+    This leads to its presentation in the following form:
+    $$\langle x, y \rangle = \langle e_i, e_j \rangle x^i y^j =: g_{ij} x^i y^j.$$
+    $\R^m$ is just a special case here.
+\end{definition} 
+
+\begin{definition}[Orthogonality]
+    \hfil
+    \begin{itemize}
+        \item $x \bot y :\Leftrightarrow \langle x, y\rangle = 0;$
+        \item Basis is called orthonormal if $\langle e_i, e_j \rangle = \delta_{ij}$. In this case: $$ \langle x, y \rangle = \delta_{ij} x^iy^j = \sum_{i, j} x^i \cdot y^j.$$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Angle between vectors]
+    It is known that $$\langle x, y \rangle^2 \leq \langle x, x \rangle \langle y, y\rangle = \lVert x \rVert^2 \lVert y \rVert^2.$$
+    Thus, for all $x, y \in \R^m$ there exists an angle $\varphi \in [0, \pi]$ such that:
+    $$\langle x, y \rangle = \lVert x \rVert \lVert y \rVert \cos \varphi.$$
+\end{definition}
+
+Fact: Any $L: \R^m \to \R$ has the form $$L(x) = \langle \xi, x \rangle,$$
+where $\xi$ is unique for each $L$.
+
+\end{document}
